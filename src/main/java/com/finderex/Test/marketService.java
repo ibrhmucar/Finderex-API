@@ -1,2 +1,4 @@
-package com.finderex.Test;public class marketService {
+package com.finderex.Test;
+
+public class marketService {
 }

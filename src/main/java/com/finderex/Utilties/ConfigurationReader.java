@@ -1,4 +1,4 @@
-package com.useinsider.Utilities;
+package com.finderex.Utilties;
 
 import java.io.FileInputStream;
 import java.util.Properties;

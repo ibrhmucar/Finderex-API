@@ -1,2 +1,4 @@
-package com.finderex.Test;public class boosterService {
+package com.finderex.Test;
+
+public class boosterService {
 }

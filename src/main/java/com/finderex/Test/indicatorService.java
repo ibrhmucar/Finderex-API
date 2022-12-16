@@ -1,2 +1,4 @@
-package com.finderex.Test;public class indicatorService {
+package com.finderex.Test;
+
+public class indicatorService {
 }

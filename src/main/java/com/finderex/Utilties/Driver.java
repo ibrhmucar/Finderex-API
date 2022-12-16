@@ -1,4 +1,4 @@
-package com.useinsider.Utilities;
+package com.finderex.Utilties;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;

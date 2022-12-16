@@ -1,2 +1,4 @@
-package com.finderex.Test;public class pairService {
+package com.finderex.Test;
+
+public class pairService {
 }
