@@ -1,6 +1,7 @@
 package com.finderex.Test;
 
-
+import com.finderex.finderexAPI.Data;
+import com.finderex.finderexAPI.login;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -8,15 +9,11 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.LinkedHashSet;
 
+public class authService extends credential {
 
-public class authService {
-
-    String id = "b0a98831-9c7d-44fc-ba71-74accd989061";
-    String ekipId = "x-ekip-client-id";
-    String secret = "03284666f38d76a38b2a8f5a348c5db04cf8d59f58250e65aab914af286f998c58572f8fc586f404ae81c34b005bd7b7";
-    String ekipSecret = "x-ekip-client-secret";
+    login login = new login();
+    Data data = new Data();
 
     @BeforeMethod
 
@@ -44,12 +41,11 @@ public class authService {
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
 
-        String accessToken = response.path("data.accessToken");
-        System.out.println(accessToken);
-
     }
+
+
     @Test
-    public void sendEmail(){
+    public void sendEmail() {
         String body = "{\n" +
                 "  \"userData\": \"ibrahim.ucar@ekip.co\",\n" +
                 "  \"type\": \"forgotPassword\"\n" +
@@ -66,10 +62,68 @@ public class authService {
         Assert.assertEquals(response.getStatusCode(), 201);
         Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
 
-        Object bodyMessage = response.path("");
-        System.out.println(bodyMessage);
 
     }
+
+    @Test
+    public void refreshToken() {
+
+        Response response = RestAssured.given().accept(ContentType.JSON)
+                .and().contentType(ContentType.JSON)
+                .and().headers(ekipId, id)
+                .and().headers(ekipSecret, secret)
+                .and().headers("Authorization", "Bearer " + refreshToken)
+                .when().post("/refresh-token");
+
+
+        Assert.assertEquals(response.getStatusCode(), 201);
+        Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
+
+    }
+    @Test
+    public void registery() {
+
+        String body = "{\n" +
+                "  \"email\": \"ibrahim.u@ekip.co\",\n" +
+                "  \"password\": \"Abcd1234.\",\n" +
+                "  \"firstName\": \"ibrahim\",\n" +
+                "  \"lastName\": \"ucar\",\n" +
+                "  \"phoneNumber\": \"+905076095085\",\n" +
+                "  \"photoURL\": \"https://www.shutterstock.com/image-photo/haifa-israel-feb-17-2021-storm-1920356939\",\n" +
+                "  \"username\": \"ibrhmucar10\"\n" +
+                "}";
+
+        Response response = RestAssured.given().accept(ContentType.JSON)
+                .and().contentType(ContentType.JSON)
+                .and().headers(ekipId, id)
+                .and().headers(ekipSecret, secret)
+                .and().body(body)
+                .and().headers("Authorization", "Bearer " + accessToken)
+                .when().post("/register");
+
+        System.out.println(response.asString());
+        Assert.assertEquals(response.getStatusCode(), 201);
+        Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
+
+    }
+
+    @Test
+    public void logOut() {
+
+        Response response = RestAssured.given().accept(ContentType.JSON)
+                .and().contentType(ContentType.JSON)
+                .and().headers(ekipId, id)
+                .and().headers(ekipSecret, secret)
+                .and().headers("Authorization", "Bearer " + accessToken)
+                .when().post("/logout");
+
+
+        Assert.assertEquals(response.getStatusCode(), 201);
+        Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
+
+
+    }
+
 
 
 }
