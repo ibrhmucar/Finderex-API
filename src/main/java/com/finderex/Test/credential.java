@@ -2,6 +2,8 @@ package com.finderex.Test;
 
 public abstract class credential {
 
+
+
     String id = "b0a98831-9c7d-44fc-ba71-74accd989061";
     String ekipId = "x-ekip-client-id";
     String secret = "03284666f38d76a38b2a8f5a348c5db04cf8d59f58250e65aab914af286f998c58572f8fc586f404ae81c34b005bd7b7";
