@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 
 public class userService extends credential {
 
+    authService authService = new authService();
+
     @BeforeMethod
     public void apiSetUp() {
         RestAssured.baseURI = "https://api.sandbox.finderex.com/v1";
@@ -22,9 +24,13 @@ public class userService extends credential {
                 .and().contentType(ContentType.JSON)
                 .and().headers(ekipId, id)
                 .and().headers(ekipSecret, secret)
-                .and().headers("Authorization", "Bearer " + accessToken)
+                .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/users");
-
+        System.out.println(ekipId);
+        System.out.println(ekipSecret);
+        System.out.println(id);
+        System.out.println(secret);
+        System.out.println(authService.getAccessToken());
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
 

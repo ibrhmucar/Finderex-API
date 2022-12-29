@@ -1,3 +1,4 @@
+/*
 package com.finderex.Test;
 
 import io.restassured.RestAssured;
@@ -9,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class healthService extends credential {
 
-
+    authService authService = new authService();
 
     @BeforeMethod
 
@@ -25,7 +26,7 @@ public class healthService extends credential {
                 .and().contentType(ContentType.JSON)
                 .and().headers(ekipId, id)
                 .and().headers(ekipSecret, secret)
-                .and().headers("Authorization", "Bearer " + accessToken)
+                .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/database");
 
 
@@ -39,7 +40,7 @@ public class healthService extends credential {
                 .and().contentType(ContentType.JSON)
                 .and().headers(ekipId, id)
                 .and().headers(ekipSecret, secret)
-                .and().headers("Authorization", "Bearer " + accessToken)
+                .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/service");
 
         Assert.assertEquals(response.getStatusCode(), 200);
@@ -49,3 +50,4 @@ public class healthService extends credential {
 
 
 }
+*/

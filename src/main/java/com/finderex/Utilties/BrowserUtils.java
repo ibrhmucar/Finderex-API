@@ -1,5 +1,6 @@
 package com.finderex.Utilties;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -63,4 +64,13 @@ public class BrowserUtils {
         ((JavascriptExecutor) Driver.get()).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
+    public static String getInfo(String value) {
+
+        Dotenv dotenv = Dotenv.configure()
+                .filename("datas.env")
+                .load();
+
+        return dotenv.get(value);
+
+    }
 }
