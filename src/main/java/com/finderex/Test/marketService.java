@@ -113,5 +113,39 @@ public class marketService extends credential {
 
     }
 
+    @Test
+
+    public void fear_greed() {
+
+        Response response = RestAssured.given().accept("application/json")
+                .and().contentType("application/json")
+                .and().headers(ekipId, id).and()
+                .headers(ekipSecret, secret).and()
+                .headers("Authorization", "Bearer " + authService.getAccessToken())
+                .when().get("/fear-greed");
+
+        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
+        System.out.println(response.asString());
+
+    }
+
+    @Test
+
+    public void fear_greed_post() {
+
+        Response response = RestAssured.given().accept("application/json")
+                .and().contentType("application/json")
+                .and().headers(ekipId, id).and()
+                .headers(ekipSecret, secret).and()
+                .headers("Authorization", "Bearer " + authService.getAccessToken())
+                .when().get("/fear-greed/now");
+
+        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
+        System.out.println(response.asString());
+
+    }
+
 
 }
