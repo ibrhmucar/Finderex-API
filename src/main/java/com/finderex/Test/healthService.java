@@ -1,4 +1,4 @@
-/*
+
 package com.finderex.Test;
 
 import io.restassured.RestAssured;
@@ -45,9 +45,9 @@ public class healthService extends credential {
 
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
+        System.out.println(response.asString());
 
     }
 
 
 }
-*/

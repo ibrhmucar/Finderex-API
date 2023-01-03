@@ -136,9 +136,9 @@ public class marketService extends credential {
 
         Response response = RestAssured.given().accept("application/json")
                 .and().contentType("application/json")
-                .and().headers(ekipId, id).and()
-                .headers(ekipSecret, secret).and()
-                .headers("Authorization", "Bearer " + authService.getAccessToken())
+                .and().headers(ekipId, id)
+                .and().headers(ekipSecret, secret)
+                .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/fear-greed/now");
 
         Assert.assertEquals(response.getStatusCode(), 200);
