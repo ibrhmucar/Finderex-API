@@ -16,6 +16,7 @@ public abstract class credential {
     String ekipId = credential("ekipId");
     String ekipSecret = credential("ekipSecret");
     String secret = credential("secret");
+    String url1 = credential("url");
 
 }
 

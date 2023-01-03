@@ -60,7 +60,8 @@ public class boosterService extends credential {
     @Test
 
 
-    public void booster_indicator_delete() {
+    public void booster_indicator_Pair_Id_delete() {
+        //must be written id number, not boosterID or indicatorID or assetID
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
                 .and().headers(ekipId, id)
@@ -75,7 +76,7 @@ public class boosterService extends credential {
     }
 
     @Test
-    public void boosterIndicators() {
+    public void boosterIndicators_Post() {
 
         String body = "{\n" +
                 "  \"typeOf\": \"crypto\",\n" +
@@ -103,4 +104,29 @@ public class boosterService extends credential {
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
     }
+    @Test
+    public void boosterIndicators_Patch() {
+        //pair name must be existed in the booster page
+        String body = "{\n" +
+                "  \"assetSymbol\": \"CAKEUSDT\",\n" +
+                "  \"intervals\": \"5m\",\n" +
+                "  \"indicators\": [\n" +
+                "    10\n" +
+                "  ]\n" +
+                "}";
+
+        Response response = RestAssured.given()
+                .accept("application/json")
+                .and().contentType("application/json")
+                .and().headers(ekipId, id)
+                .and().headers(ekipSecret, secret)
+                .and().body(body)
+                .and().headers("Authorization", "Bearer " + authService.getAccessToken())
+                .when().patch("/indicators/283");
+
+        System.out.println(response.asString());
+        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
+    }
+
 }

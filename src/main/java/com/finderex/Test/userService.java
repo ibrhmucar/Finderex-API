@@ -1,5 +1,6 @@
 package com.finderex.Test;
 
+import com.finderex.Utilties.BrowserUtils;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -33,6 +34,14 @@ public class userService extends credential {
         System.out.println(authService.getAccessToken());
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
+
+    }
+
+    @Test
+
+    public void user(){
+
+         BrowserUtils.apiTest_Get(ekipId, id, ekipSecret, secret, url1, "boosterId");
 
     }
 
