@@ -1,5 +1,6 @@
 package com.finderex.Test;
 
+import com.finderex.Utilties.FinAPIUtil;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -19,8 +20,7 @@ public class pairService extends credential {
         Response response = RestAssured.given()
                 .accept("application/json")
                 .and().contentType("application/json")
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get();
 

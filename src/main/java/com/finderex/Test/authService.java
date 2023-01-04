@@ -2,6 +2,8 @@
 package com.finderex.Test;
 
 import com.finderex.Utilties.BrowserUtils;
+import com.finderex.Utilties.Credentials;
+import com.finderex.Utilties.FinAPIUtil;
 import com.finderex.finderexAPI.Data;
 import com.finderex.finderexAPI.login;
 import io.restassured.RestAssured;
@@ -23,7 +25,7 @@ public class authService extends credential {
 
     @BeforeMethod
 
-    public String getAccessToken() {
+    public static String getAccessToken() {
 
         String body = "{\n" +
                 "  \"userData\": \"ibrhmucar@gmail.com\",\n" +
@@ -34,8 +36,7 @@ public class authService extends credential {
         String url = "https://api.sandbox.finderex.com/v1/auth/login";
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().body(body)
                 .when().post(url);
 
@@ -54,8 +55,7 @@ public class authService extends credential {
         String url = "https://api.sandbox.finderex.com/v1/auth/login";
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().body(body)
                 .when().post(url);
 
@@ -82,8 +82,7 @@ public class authService extends credential {
 
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().body(body)
                 .when().post("/login");
 
@@ -103,8 +102,7 @@ public class authService extends credential {
 
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().body(body)
                 .when().post("/send-email");
 
@@ -120,8 +118,7 @@ public class authService extends credential {
 
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + getRefreshToken())
                 .when().post("/refresh-token");
 
@@ -146,8 +143,7 @@ public class authService extends credential {
 
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().body(body)
                 .and().headers("Authorization", "Bearer " + accessToken)
                 .when().post("/register");
@@ -163,8 +159,7 @@ public class authService extends credential {
 
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + accessToken)
                 .when().post("/logout");
 

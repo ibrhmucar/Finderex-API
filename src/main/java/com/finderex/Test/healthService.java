@@ -1,6 +1,7 @@
 
 package com.finderex.Test;
 
+import com.finderex.Utilties.FinAPIUtil;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -24,8 +25,7 @@ public class healthService extends credential {
 
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/database");
 
@@ -38,8 +38,7 @@ public class healthService extends credential {
 
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/service");
 

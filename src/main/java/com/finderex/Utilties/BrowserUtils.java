@@ -1,7 +1,6 @@
 package com.finderex.Utilties;
 
 import com.finderex.Test.authService;
-import io.github.cdimascio.dotenv.Dotenv;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -18,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class BrowserUtils extends credentials {
+public class BrowserUtils extends Credentials {
 
     static authService authService = new authService();
 
@@ -74,53 +73,7 @@ public class BrowserUtils extends credentials {
         ((JavascriptExecutor) Driver.get()).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
-    public static String getInfo(String value) {
-
-        Dotenv dotenv = Dotenv.configure()
-                .filename("datas.env")
-                .load();
-
-        return dotenv.get(value);
-
-    }
-
-    public static String apiTest_Get(String url, String json) {
 
 
-        Response response = RestAssured.given().accept(ContentType.JSON)
-                .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
-                .and().headers("Authorization", "Bearer " + authService.getAccessToken())
-                .when().get(url);
-
-        Assert.assertEquals(response.statusCode(), 200);
-        Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
-
-        System.out.println(response.asString());
-        String list = response.path("data." + json + "").toString();
-        System.out.println(list);
-        return list;
-
-
-    }
-
-    public static String apiTest_Post(String url, String json) {
-
-        Response response = RestAssured.given().accept(ContentType.JSON)
-                .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
-                .and().headers("Authorization", "Bearer " + authService.getAccessToken())
-                .when().post(url);
-
-        Assert.assertEquals(response.statusCode(), 200);
-        Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
-
-        String list = response.path("data." + json + "").toString();
-        System.out.println(list);
-        return list;
-
-    }
 
 }

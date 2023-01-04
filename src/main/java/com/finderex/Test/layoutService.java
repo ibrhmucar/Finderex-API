@@ -1,5 +1,6 @@
 package com.finderex.Test;
 
+import com.finderex.Utilties.FinAPIUtil;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -21,8 +22,7 @@ public class layoutService extends credential {
     public void indicator() {
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/booster");
 
@@ -36,8 +36,7 @@ public class layoutService extends credential {
     public void indicator_Post() {
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().post();
 

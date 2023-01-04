@@ -1,5 +1,6 @@
 package com.finderex.Test;
 
+import com.finderex.Utilties.FinAPIUtil;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -34,8 +35,7 @@ public class marketService extends credential {
         Response response = RestAssured.given()
                 .accept("application/json")
                 .and().contentType("application/json")
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/long-short/254");
 
@@ -48,7 +48,7 @@ public class marketService extends credential {
     @Test
     public void world_indices() {
 
-        Response response = RestAssured.given().accept("application/json").and().contentType("application/json").and().headers(ekipId, id).and().headers(ekipSecret, secret).and().headers("Authorization", "Bearer " + authService.getAccessToken()).when().get("/world-indices");
+        Response response = RestAssured.given().accept("application/json").and().contentType("application/json").and().headers(FinAPIUtil.getSwaggerCredentials()).and().headers("Authorization", "Bearer " + authService.getAccessToken()).when().get("/world-indices");
 
 
         Assert.assertEquals(response.getStatusCode(), 200);
@@ -61,7 +61,7 @@ public class marketService extends credential {
 
         String body = "{\n" + "  \"indexes\": [\n" + "    \"AEX\"\n" + "  ],\n" + "  \"typeOf\": \"short\"\n" + "}";
 
-        Response response = RestAssured.given().accept("application/json").and().contentType("application/json").and().headers(ekipId, id).and().headers(ekipSecret, secret).and().body(body).and().headers("Authorization", "Bearer " + authService.getAccessToken()).when().post("/world-indices");
+        Response response = RestAssured.given().accept("application/json").and().contentType("application/json").and().headers(FinAPIUtil.getSwaggerCredentials()).and().body(body).and().headers("Authorization", "Bearer " + authService.getAccessToken()).when().post("/world-indices");
 
 
         Assert.assertEquals(response.getStatusCode(), 201);
@@ -73,7 +73,7 @@ public class marketService extends credential {
 
     public void world_indices_id() {
 
-        Response response = RestAssured.given().accept("application/json").and().contentType("application/json").and().headers(ekipId, id).and().headers(ekipSecret, secret).and().headers("Authorization", "Bearer " + authService.getAccessToken()).when().get("/world-indices/5");
+        Response response = RestAssured.given().accept("application/json").and().contentType("application/json").and().headers(FinAPIUtil.getSwaggerCredentials()).and().headers("Authorization", "Bearer " + authService.getAccessToken()).when().get("/world-indices/5");
 
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
@@ -84,7 +84,7 @@ public class marketService extends credential {
 
     public void season_index_type() {
 
-        Response response = RestAssured.given().accept("application/json").and().contentType("application/json").and().headers(ekipId, id).and().headers(ekipSecret, secret).and().pathParam("id", 30).and().headers("Authorization", "Bearer " + authService.getAccessToken()).when().get("/season-indices/{id}");
+        Response response = RestAssured.given().accept("application/json").and().contentType("application/json").and().headers(FinAPIUtil.getSwaggerCredentials()).and().pathParam("id", 30).and().headers("Authorization", "Bearer " + authService.getAccessToken()).when().get("/season-indices/{id}");
 
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
@@ -96,7 +96,7 @@ public class marketService extends credential {
 
     public void season_indices() {
 
-        Response response = RestAssured.given().accept("application/json").and().contentType("application/json").and().headers(ekipId, id).and().headers(ekipSecret, secret).and().headers("Authorization", "Bearer " + authService.getAccessToken()).when().get("/season-indices");
+        Response response = RestAssured.given().accept("application/json").and().contentType("application/json").and().headers(FinAPIUtil.getSwaggerCredentials()).and().headers("Authorization", "Bearer " + authService.getAccessToken()).when().get("/season-indices");
 
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
@@ -119,8 +119,7 @@ public class marketService extends credential {
 
         Response response = RestAssured.given().accept("application/json")
                 .and().contentType("application/json")
-                .and().headers(ekipId, id).and()
-                .headers(ekipSecret, secret).and()
+                .and().headers(FinAPIUtil.getSwaggerCredentials()).and()
                 .headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/fear-greed");
 
@@ -136,8 +135,7 @@ public class marketService extends credential {
 
         Response response = RestAssured.given().accept("application/json")
                 .and().contentType("application/json")
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/fear-greed/now");
 

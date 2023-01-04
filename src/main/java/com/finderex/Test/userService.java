@@ -1,6 +1,8 @@
 package com.finderex.Test;
 
 import com.finderex.Utilties.BrowserUtils;
+import com.finderex.Utilties.Credentials;
+import com.finderex.Utilties.FinAPIUtil;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -23,15 +25,11 @@ public class userService extends credential {
 
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(Credentials.getInfo("ekipId"), Credentials.getInfo("id"))
+                .and().headers(Credentials.getInfo("ekipSecret"), Credentials.getInfo("secret"))
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/users");
-        System.out.println(ekipId);
-        System.out.println(ekipSecret);
-        System.out.println(id);
-        System.out.println(secret);
-        System.out.println(authService.getAccessToken());
+
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
 
@@ -41,7 +39,7 @@ public class userService extends credential {
 
     public void user(){
 
-         BrowserUtils.apiTest_Get(userGet, "id");
+        FinAPIUtil.apiTest_Get(Credentials.getInfo("url"), "id");
 
     }
 

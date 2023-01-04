@@ -12,11 +12,6 @@ public abstract class credential {
         return result;
     }
 
-    String id = credential("id");
-    String ekipId = credential("ekipId");
-    String ekipSecret = credential("ekipSecret");
-    String secret = credential("secret");
-    String userGet = credential("url");
 
 }
 

@@ -1,5 +1,6 @@
 package com.finderex.Test;
 
+import com.finderex.Utilties.FinAPIUtil;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -21,8 +22,7 @@ public class boosterService extends credential {
     public void booster_id_interval() {
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/45/5m");
 
@@ -34,8 +34,7 @@ public class boosterService extends credential {
     public void booster() {
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/45/5m");
 
@@ -48,8 +47,7 @@ public class boosterService extends credential {
     public void booster_delete() {
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/268");
 
@@ -64,8 +62,7 @@ public class boosterService extends credential {
         //must be written id number, not boosterID or indicatorID or assetID
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().delete("/indicators/227/indicators?indicatorId=2965");
 
@@ -94,8 +91,7 @@ public class boosterService extends credential {
         Response response = RestAssured.given()
                 .accept("application/json")
                 .and().contentType("application/json")
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().body(body)
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().post("/indicators");
@@ -118,8 +114,7 @@ public class boosterService extends credential {
         Response response = RestAssured.given()
                 .accept("application/json")
                 .and().contentType("application/json")
-                .and().headers(ekipId, id)
-                .and().headers(ekipSecret, secret)
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().body(body)
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().patch("/indicators/283");
