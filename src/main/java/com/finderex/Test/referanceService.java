@@ -1,13 +1,14 @@
 package com.finderex.Test;
 
 import com.finderex.Utilties.BrowserUtils;
+import com.finderex.Utilties.FinAPIUtil;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class referanceService extends credential {
+public class referanceService  {
 
     authService authService = new authService();
 
@@ -23,8 +24,7 @@ public class referanceService extends credential {
 
         Response response = RestAssured.given().accept("application/json")
                 .and().contentType("application/json")
-                .and().headers(credential("ekipId"), credential("id"))
-                .and().headers(credential("ekipSecret"), credential("secret"))
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get(UUID);
 

@@ -14,7 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 
-public class authService extends credential {
+public class authService  {
 
     login login = new login();
     Data data = new Data();

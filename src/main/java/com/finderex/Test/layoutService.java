@@ -8,7 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class layoutService extends credential {
+public class layoutService  {
 
     authService authService = new authService();
 

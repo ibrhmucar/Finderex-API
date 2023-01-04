@@ -10,7 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class userService extends credential {
+public class userService  {
 
     authService authService = new authService();
 
@@ -25,8 +25,7 @@ public class userService extends credential {
 
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
-                .and().headers(Credentials.getInfo("ekipId"), Credentials.getInfo("id"))
-                .and().headers(Credentials.getInfo("ekipSecret"), Credentials.getInfo("secret"))
+                .and().headers(FinAPIUtil.getSwaggerCredentials())
                 .and().headers("Authorization", "Bearer " + authService.getAccessToken())
                 .when().get("/users");
 
@@ -36,11 +35,8 @@ public class userService extends credential {
     }
 
     @Test
-
     public void user(){
-
         FinAPIUtil.apiTest_Get(Credentials.getInfo("url"), "id");
-
     }
 
 

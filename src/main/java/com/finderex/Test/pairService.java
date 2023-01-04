@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class pairService extends credential {
+public class pairService  {
     authService authService = new authService();
 
     @BeforeClass

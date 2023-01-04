@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class BrowserUtils extends Credentials {
+public class BrowserUtils  {
 
     static authService authService = new authService();
 

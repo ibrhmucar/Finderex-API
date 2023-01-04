@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class marketService extends credential {
+public class marketService  {
 
     authService authService = new authService();
 

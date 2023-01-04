@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class indicatorService extends credential {
+public class indicatorService  {
 
     authService authService = new authService();
 
