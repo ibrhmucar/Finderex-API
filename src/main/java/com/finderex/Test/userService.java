@@ -41,7 +41,7 @@ public class userService extends credential {
 
     public void user(){
 
-         BrowserUtils.apiTest_Get(ekipId, id, ekipSecret, secret, url1, "boosterId");
+         BrowserUtils.apiTest_Get(userGet, "id");
 
     }
 

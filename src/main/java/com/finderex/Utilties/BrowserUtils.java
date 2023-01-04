@@ -17,9 +17,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class BrowserUtils {
+
+public class BrowserUtils extends credentials {
 
     static authService authService = new authService();
+
+
 
     public static String getScreenshot(String name) throws IOException {
         // name the screenshot with the current date time to avoid duplicate name
@@ -81,7 +84,8 @@ public class BrowserUtils {
 
     }
 
-    public static String apiTest_Get(String ekipId, String id, String ekipSecret, String secret, String url, String token) {
+    public static String apiTest_Get(String url, String json) {
+
 
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().contentType(ContentType.JSON)
@@ -93,10 +97,29 @@ public class BrowserUtils {
         Assert.assertEquals(response.statusCode(), 200);
         Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
 
-        String list = response.path("data."+token+"").toString();
+        System.out.println(response.asString());
+        String list = response.path("data." + json + "").toString();
         System.out.println(list);
         return list;
 
+
+    }
+
+    public static String apiTest_Post(String url, String json) {
+
+        Response response = RestAssured.given().accept(ContentType.JSON)
+                .and().contentType(ContentType.JSON)
+                .and().headers(ekipId, id)
+                .and().headers(ekipSecret, secret)
+                .and().headers("Authorization", "Bearer " + authService.getAccessToken())
+                .when().post(url);
+
+        Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(response.contentType(), "application/json; charset=utf-8");
+
+        String list = response.path("data." + json + "").toString();
+        System.out.println(list);
+        return list;
 
     }
 
